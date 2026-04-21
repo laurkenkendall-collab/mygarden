@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Garden of Eden — 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1e2416;
+  --cream: #f5f0e6;
+  --parchment: #ede5d0;
+  --sage: #6b8f62;
+  --deep: #2e4a28;
+  --gold: #b8862a;
+  --rust: #9e4a2a;
+  --blush: #c47a7a;
+  --stone: #8a8070;
+  --lavender: #7a6a90;
+  --sky: #4a7a90;
+  --light-sage: #c8dab8;
+  --pale-gold: #f0dfa0;
+  --muted: #6a6458;
+  --success: #4a8a44;
+  --warn: #c8861a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--cream); font-family: 'Jost', sans-serif; color: var(--ink); font-weight: 300; min-height: 100vh; }
+
+/* HEADER */
+header {
+  background: var(--deep);
+  padding: 1.8rem 1.5rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(184,134,42,0.18) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(107,143,98,0.15) 0%, transparent 60%);
+}
+.h-inner { position: relative; z-index: 1; }
+.h-eye { font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; font-weight: 500; }
+h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem,5vw,2.8rem); font-weight: 600; color: var(--cream); line-height: 1.1; }
+h1 em { font-style: italic; color: var(--pale-gold); }
+.h-sub { color: var(--light-sage); font-size: 0.72rem; letter-spacing: 2px; margin-top: 0.3rem; }
+.h-frost { display: inline-block; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--pale-gold); font-size: 0.68rem; padding: 3px 12px; border-radius: 20px; margin-top: 0.6rem; letter-spacing: 1px; }
+
+/* NAV */
+nav { background: var(--ink); display: flex; overflow-x: auto; scrollbar-width: none; position: sticky; top: 0; z-index: 100; }
+nav::-webkit-scrollbar { display: none; }
+.tab { flex-shrink: 0; padding: 0.85rem 1.1rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.4); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+.tab:hover { color: rgba(255,255,255,0.7); }
+.tab.active { color: var(--pale-gold); border-bottom-color: var(--gold); }
+
+/* SECTIONS */
+.section { display: none; }
+.section.active { display: block; }
+.content { max-width: 960px; margin: 0 auto; padding: 1.8rem 1.2rem 3rem; }
+
+/* TYPOGRAPHY */
+h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 600; color: var(--deep); margin-bottom: 0.25rem; }
+h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--deep); margin-bottom: 0.6rem; }
+.intro { font-size: 0.82rem; color: var(--muted); line-height: 1.7; border-left: 3px solid var(--light-sage); padding-left: 0.8rem; margin-bottom: 1.5rem; }
+
+/* CARDS */
+.card { background: white; border-radius: 8px; padding: 1.1rem 1.2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 0.9rem; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.58rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin: 2px; }
+.b-now { background: #fde8c8; color: #7a3a08; }
+.b-soon { background: #e8f0d8; color: #2a5a20; }
+.b-done { background: #e0e0e0; color: #666; }
+.b-succession { background: #e8d8f0; color: #4a2a70; }
+.b-spring { background: #ddf0d8; color: #2e6a28; }
+.b-summer { background: #fdeec8; color: #7a4a10; }
+.b-fall { background: #ead8c0; color: #6a3a18; }
+.b-perennial { background: #e0d8f0; color: #3a2a70; }
+.b-water { background: #d0e8f5; color: #1a4a6a; }
+
+/* ── THIS WEEK PANEL ── */
+.week-hero {
+  background: linear-gradient(135deg, var(--deep) 0%, #4a7a44 100%);
+  border-radius: 10px;
+  padding: 1.4rem 1.5rem;
+  color: white;
+  margin-bottom: 1.2rem;
+  position: relative;
+  overflow: hidden;
+}
+.week-hero::before {
+  content: '🌿';
+  position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%);
+  font-size: 4rem; opacity: 0.15;
+}
+.week-label { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--light-sage); margin-bottom: 0.3rem; }
+.week-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--pale-gold); }
+.week-subtitle { font-size: 0.78rem; color: rgba(255,255,255,0.7); margin-top: 0.2rem; }
+
+.week-nav { display: flex; gap: 0.5rem; margin-bottom: 1.2rem; align-items: center; flex-wrap: wrap; }
+.week-btn { background: white; border: 1.5px solid #ddd; border-radius: 6px; padding: 0.45rem 0.9rem; font-size: 0.75rem; font-family: 'Jost', sans-serif; cursor: pointer; color: var(--ink); transition: all 0.15s; }
+.week-btn:hover { border-color: var(--sage); color: var(--deep); }
+.week-btn.active-week { background: var(--deep); color: white; border-color: var(--deep); }
+.week-current { font-size: 0.72rem; color: var(--muted); margin-left: auto; }
+
+/* TASK LIST */
+.task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid #f0ece4;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.task-item:last-child { border-bottom: none; }
+.task-item.done { opacity: 0.45; }
+.task-item.done .task-text { text-decoration: line-through; }
+.task-cb {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid var(--sage); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px; transition: all 0.2s;
+}
+.task-item.done .task-cb { background: var(--sage); border-color: var(--sage); }
+.task-cb::after { content: '✓'; color: white; font-size: 0.65rem; display: none; }
+.task-item.done .task-cb::after { display: block; }
+.task-text { font-size: 0.82rem; line-height: 1.5; flex: 1; }
+.task-tag { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); }
+.task-priority { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.tp-high { background: var(--rust); }
+.tp-med { background: var(--gold); }
+.tp-low { background: var(--sage); }
+
+/* SUCCESSION TRACKER */
+.succession-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+.succession-table th { background: var(--deep); color: white; padding: 0.5rem 0.7rem; text-align: left; font-weight: 500; font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; }
+.succession-table td { padding: 0.55rem 0.7rem; border-bottom: 1px solid #f0ece4; vertical-align: middle; }
+.succession-table tr:last-child td { border-bottom: none; }
+.succession-table tr:hover td { background: #fafaf8; }
+.sow-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin: 0 2px; }
+.sow-active { background: var(--sage); }
+.sow-past { background: #ddd; }
+.sow-future { background: #f0ece4; border: 1px solid #ddd; }
+.sow-label { font-size: 0.58rem; color: var(--muted); }
+
+/* CALENDAR */
+.cal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.7rem; }
+.cal-month { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.cal-month-head { padding: 0.5rem 0.8rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: white; }
+.cal-month-body { padding: 0.6rem 0.8rem; font-size: 0.72rem; line-height: 1.6; color: #555; }
+.cal-month-body .task { padding: 1px 0; }
+.jan { background: #4a6a8a; } .feb { background: #5a6a7a; } .mar { background: #4a7a5a; }
+.apr { background: #5a8a4a; } .may { background: #6a9a3a; } .jun { background: #8a8a2a; }
+.jul { background: #9a7a1a; } .aug { background: #9a6a18; } .sep { background: #8a5a28; }
+.oct { background: #7a5a38; } .nov { background: #6a5a48; } .dec { background: #5a5a5a; }
+
+/* NOTES */
+.zone-notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+@media (max-width: 580px) { .zone-notes-grid { grid-template-columns: 1fr; } }
+.note-card { background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow: hidden; }
+.note-head { padding: 0.6rem 0.9rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: white; }
+.note-body { padding: 0.8rem 0.9rem; }
+.note-area {
+  width: 100%; min-height: 90px; border: 1.5px solid #e8e4dc;
+  border-radius: 6px; padding: 0.55rem 0.7rem;
+  font-family: 'Jost', sans-serif; font-size: 0.78rem;
+  color: var(--ink); resize: vertical; background: #fdfbf7;
+  line-height: 1.6; transition: border-color 0.2s;
+}
+.note-area:focus { outline: none; border-color: var(--sage); }
+.note-save { margin-top: 0.4rem; background: var(--deep); color: white; border: none; border-radius: 5px; padding: 0.35rem 0.9rem; font-size: 0.7rem; font-family: 'Jost', sans-serif; cursor: pointer; letter-spacing: 0.5px; transition: background 0.2s; }
+.note-save:hover { background: var(--sage); }
+.note-saved { font-size: 0.65rem; color: var(--success); margin-left: 0.5rem; opacity: 0; transition: opacity 0.3s; }
+.note-saved.show { opacity: 1; }
+
+/* PLAN TABS */
+.plan-nav { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.plan-tab { background: white; border: 1.5px solid #ddd; border-radius: 20px; padding: 0.35rem 0.85rem; font-size: 0.7rem; font-weight: 500; cursor: pointer; color: var(--muted); transition: all 0.15s; }
+.plan-tab:hover { border-color: var(--sage); color: var(--deep); }
+.plan-tab.active { background: var(--deep); color: white; border-color: var(--deep); }
+.plan-section { display: none; }
+.plan-section.active { display: block; }
+
+/* ZONE CARDS */
+.zone-card { border-radius: 10px; overflow: hidden; margin-bottom: 1rem; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+.zc-head { padding: 0.75rem 1.1rem; display: flex; justify-content: space-between; align-items: center; color: white; }
+.zc-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; }
+.zc-size { font-size: 0.68rem; opacity: 0.8; }
+.zc-body { background: white; padding: 0.9rem 1.1rem; font-size: 0.8rem; line-height: 1.75; color: #4a4a40; }
+.zc-body strong { color: var(--deep); }
+.tip-box { background: #fdf8ee; border-left: 3px solid var(--gold); padding: 0.5rem 0.7rem; border-radius: 0 5px 5px 0; margin-top: 0.6rem; font-size: 0.76rem; }
+.water-box { background: #edf6fc; border-left: 3px solid var(--sky); padding: 0.5rem 0.7rem; border-radius: 0 5px 5px 0; margin-top: 0.5rem; font-size: 0.76rem; }
+
+/* COMPANION */
+.companion-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px,1fr)); gap: 0.7rem; }
+.cc { background: white; border-radius: 8px; padding: 0.85rem 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid var(--sage); }
+.cc.gold { border-left-color: var(--gold); }
+.cc.rust { border-left-color: var(--rust); }
+.cc.lav { border-left-color: var(--lavender); }
+.cc-t { font-weight: 600; font-size: 0.83rem; color: var(--deep); margin-bottom: 0.2rem; }
+.cc-b { font-size: 0.73rem; color: #666; line-height: 1.55; }
+
+/* IRRIGATION */
+.irr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+@media (max-width: 580px) { .irr-grid { grid-template-columns: 1fr; } }
+.irr { background: white; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-top: 3px solid var(--sky); }
+.irr.gold { border-top-color: var(--gold); }
+.irr.sage { border-top-color: var(--sage); }
+.irr.rust { border-top-color: var(--rust); }
+.irr-t { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: var(--deep); margin-bottom: 0.35rem; }
+.irr-b { font-size: 0.77rem; color: #555; line-height: 1.6; }
+
+/* FOOD FOREST LAYERS */
+.ff-layer { display: grid; grid-template-columns: 95px 1fr; margin-bottom: 0.5rem; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+.ff-lbl { display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.6rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: white; padding: 0.7rem 0.4rem; }
+.ff-cnt { background: white; padding: 0.7rem 0.9rem; font-size: 0.79rem; line-height: 1.6; color: #4a4a40; }
+.ff-canopy { background: #2e4a28; } .ff-shrub { background: #4a7a44; } .ff-herb { background: #6b8f62; } .ff-ground { background: #8aaa80; } .ff-root { background: #a0805a; }
+
+/* ROSE CARDS */
+.rose-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+@media (max-width: 580px) { .rose-grid { grid-template-columns: 1fr; } }
+.rc { background: white; border-radius: 8px; padding: 0.9rem 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-top: 3px solid var(--blush); }
+.rc-type { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 1px; color: var(--blush); margin-bottom: 0.2rem; }
+.rc-name { font-weight: 600; color: var(--deep); font-size: 0.87rem; margin-bottom: 0.3rem; }
+.rc-desc { font-size: 0.73rem; color: #666; line-height: 1.55; }
+
+/* HIGHLIGHT */
+.hl { background: linear-gradient(135deg, #f5f0e4, #eef5e8); border: 1.5px solid var(--light-sage); border-radius: 8px; padding: 0.9rem 1.1rem; font-size: 0.8rem; line-height: 1.75; color: #4a4a3a; margin-bottom: 1rem; }
+.hl strong { color: var(--deep); }
+
+/* SCHEDULE TABLE */
+.sched-block { margin-bottom: 1.4rem; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+.sb-head { padding: 0.7rem 1.1rem; color: white; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; }
+.sb-spring { background: linear-gradient(90deg,#3a6a38,#5a9a58); }
+.sb-summer { background: linear-gradient(90deg,#8a5a18,#c08a30); }
+.sb-fall   { background: linear-gradient(90deg,#6a3a18,#9a5a30); }
+.sb-peren  { background: linear-gradient(90deg,#3a2a68,#6a4a98); }
+.sb-body { background: white; }
+.cr { display: grid; grid-template-columns: 1.3fr 0.9fr 0.7fr 1.4fr; gap: 0.4rem; padding: 0.5rem 1.1rem; border-bottom: 1px solid #f0ece4; font-size: 0.77rem; align-items: start; }
+.cr:last-child { border-bottom: none; }
+.cr.hdr { font-size: 0.6rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #aaa; background: #fafaf8; }
+.cn { font-weight: 600; color: var(--deep); }
+.ct { color: var(--muted); }
+.cz { color: var(--stone); font-style: italic; }
+.cn-note { font-size: 0.7rem; color: #888; }
+
+/* BATHTUB */
+.bathtub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 0.7rem; }
+.bt-card { background: white; border-radius: 8px; padding: 0.8rem 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-top: 3px solid var(--sage); }
+.bt-name { font-weight: 600; font-size: 0.83rem; color: var(--deep); margin-bottom: 0.2rem; }
+.bt-desc { font-size: 0.72rem; color: #666; line-height: 1.5; }
+
+/* GITHUB GUIDE */
+.step-list { counter-reset: steps; }
+.step { display: flex; gap: 1rem; margin-bottom: 1rem; align-items: flex-start; }
+.step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--deep); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; flex-shrink: 0; }
+.step-content { flex: 1; font-size: 0.82rem; line-height: 1.65; color: #4a4a40; padding-top: 3px; }
+.step-content strong { color: var(--deep); }
+.code-pill { background: #f0ece4; border: 1px solid #ddd; border-radius: 4px; padding: 1px 6px; font-family: monospace; font-size: 0.78rem; color: var(--rust); }
+
+/* FOOTER */
+footer { background: var(--deep); color: var(--light-sage); text-align: center; padding: 1.3rem; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.95rem; margin-top: 2rem; }
+
+/* DIVIDER */
+hr { border: none; border-top: 1px solid #e4e0d8; margin: 1.4rem 0; }
+
+/* MAP */
+.map-wrap { background: #eaf2e4; border: 2px solid #b8d0a8; border-radius: 10px; padding: 1rem; overflow-x: auto; }
+.map-compass { display: flex; justify-content: space-between; font-size: 0.62rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--stone); margin-bottom: 0.6rem; }
+.map-gate { text-align: center; font-size: 0.62rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--rust); margin-bottom: 5px; }
+.map-outer { min-width: 560px; }
+.garden-grid { display: grid; grid-template-columns: 130px 1fr 100px; grid-template-rows: auto auto auto auto; gap: 5px; }
+.gz { border-radius: 6px; padding: 0.5rem 0.6rem; border: 1.5px solid rgba(0,0,0,0.1); cursor: pointer; transition: all 0.18s; position: relative; }
+.gz:hover { transform: scale(1.025); box-shadow: 0 4px 14px rgba(0,0,0,0.16); z-index: 5; }
+.gz-lbl { font-weight: 700; font-size: 0.72rem; margin-bottom: 0.2rem; color: var(--ink); }
+.gz-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; opacity: 0.55; margin-bottom: 2px; }
+.gz-crops { font-size: 0.63rem; color: #444; line-height: 1.45; }
+.gz-coop  { background: #d8c89a; grid-column:1; grid-row:1; }
+.gz-main  { background: #c4dab0; grid-column:2; grid-row:1/4; min-height: 300px; }
+.gz-ff    { background: #f0e4b4; border: 2px dashed #b8862a !important; grid-column:3; grid-row:1/5; }
+.gz-bath  { background: #d0c8ac; grid-column:1; grid-row:2; }
+.gz-west  { background: #d4e0c0; grid-column:1; grid-row:3; }
+.gz-dl    { background: #e0d8b4; grid-column:1; grid-row:4; }
+.gz-lm    { background: #c8e0c8; grid-column:2; grid-row:4; }
+.gz-orch  { background: #f2ead0; border: 2px dashed #b8862a !important; grid-column:1/4; }
+.main-inner { display: flex; flex-direction: column; gap: 5px; height: 100%; }
+.mi { border-radius: 5px; padding: 0.4rem 0.5rem; border: 1.5px dashed rgba(0,0,0,0.12); flex:1; }
+.path-strip { background: repeating-linear-gradient(45deg,#c8a060,#c8a060 3px,#e8d098 3px,#e8d098 9px); border-radius: 3px; text-align:center; font-size:0.58rem; font-weight:700; color:#5a3a10; padding: 3px 4px; margin: 3px 0; letter-spacing:0.5px; }
+.arch-strip { background: rgba(184,134,42,0.13); border: 1.5px dashed #b8862a; border-radius: 14px 14px 4px 4px; text-align:center; padding: 3px; font-size:0.58rem; font-weight:700; color:#7a4a10; margin-bottom: 3px; }
+.tree-row { display:flex; align-items:center; gap:4px; flex-wrap:wrap; margin-top:4px; }
+.tree { width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.58rem; font-weight:700; flex-shrink:0; }
+.t-a { background:#e8d0a8; color:#5a2a10; border:2px solid #c8a870; }
+.t-c { background:#e8b8b8; color:#6a1a1a; border:2px solid #d89090; }
+.map-legend { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.8rem; }
+.leg-item { display:flex; align-items:center; gap:5px; font-size:0.65rem; color:var(--muted); }
+.leg-dot { width:10px; height:10px; border-radius:2px; flex-shrink:0; }
+.map-tooltip { position:fixed; background:var(--ink); color:white; padding:0.6rem 0.85rem; border-radius:7px; font-size:0.75rem; line-height:1.5; max-width:220px; z-index:200; pointer-events:none; opacity:0; transition:opacity 0.15s; box-shadow:0 4px 16px rgba(0,0,0,0.25); }
+
+/* Progress bar */
+.hl { background: linear-gradient(135deg, #f5f0e4, #eef5e8); border: 1.5px solid var(--light-sage); border-radius: 8px; padding: 0.9rem 1.1rem; font-size: 0.8rem; line-height: 1.75; color: #4a4a3a; margin-bottom: 1rem; }
+.hl strong { color: var(--deep); }
+.progress-wrap { background: #e8e4dc; border-radius: 10px; height: 6px; margin-top: 0.3rem; overflow: hidden; }
+.progress-bar { height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--sage), var(--deep)); transition: width 0.4s ease; }
+.progress-label { font-size: 0.65rem; color: var(--muted); margin-top: 0.2rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-inner">
+    <div class="h-eye">Zone 6b · Full Sun · Permaculture System</div>
+    <h1>My <em>Garden of Eden</em></h1>
+    <div class="h-sub">2026 Master Plan · Personal Garden App</div>
+    <div class="h-frost">❄️ Last Frost Date: May 1–15 · First Frost: ~Oct 15</div>
+  </div>
+</header>
+
+<nav>
+  <div class="tab active" onclick="showTab('week')">📅 This Week</div>
+  <div class="tab" onclick="showTab('map')">🗺 Garden Map</div>
+  <div class="tab" onclick="showTab('calendar')">🗓 Full Calendar</div>
+  <div class="tab" onclick="showTab('succession')">🔄 Succession</div>
+  <div class="tab" onclick="showTab('notes')">📝 My Notes</div>
+  <div class="tab" onclick="showTab('plan')">🌿 Full Plan</div>
+  <div class="tab" onclick="showTab('host')">🔗 Get a Link</div>
+</nav>
+
+<!-- ══════ GARDEN MAP ══════ -->
+<div id="s-map" class="section">
+<div class="content">
+  <h2>Garden Map</h2>
+  <p class="intro">Your full layout — tap any zone to see what's planted there. North is top, East is top-right, South is right edge, West is bottom. Slope runs gently downhill N→S.</p>
+
+  <div class="map-wrap">
+    <div class="map-compass"><span>⬅ MAIN GATE (W)</span><span>↑ NORTH</span><span>EASTERN GATE ➡</span></div>
+    <div class="map-outer">
+      <div class="map-gate">— — — EASTERN GATE — — —</div>
+
+      <div class="garden-grid">
+
+        <!-- Coop -->
+        <div class="gz gz-coop" onmouseenter="tip(event,'🐔 Chicken Coop','Fixed structure. Comfrey + lavender border along coop wall. Nutrient runoff from coop feeds nearby perennials.')" onmouseleave="hideTip()">
+          <div class="gz-tag">Fixed Structure</div>
+          <div class="gz-lbl">🐔 Chicken Coop</div>
+          <div class="gz-crops">Comfrey + lavender border catches nutrient runoff</div>
+        </div>
+
+        <!-- Main 53×36 -->
+        <div class="gz gz-main" style="cursor:default;">
+          <div class="arch-strip">🌿 CATTLE PANEL ARCH — over diamond paver path · cucumbers or climbing squash</div>
+          <div class="main-inner">
+            <div class="mi" style="background:#c0dcac;" onmouseenter="tip(event,'Zone A — North Beds','Spring: Carrots, beets, radish (Bed 1). Kale, bok choy, kohlrabi, arugula, radicchio (Bed 2). Sugar snaps on east fence. Summer: Cucumbers on paired cattle panel arch, beans (direct sow), corn block (4×4), tomatoes in existing bed with basil.')" onmouseleave="hideTip()">
+              <div class="gz-lbl">Zone A — North Beds (2 new 4×8 raised beds)</div>
+              <div class="gz-crops">🥕 Spring roots + greens → ☀️ Cucumbers on arches · Beans · Corn · Tomatoes</div>
+            </div>
+            <div class="path-strip">⬦ ⬦  DIAMOND RED PAVER PATH — on-point diamonds — Main Gate → Through Beds  ⬦ ⬦</div>
+            <div class="mi" style="background:#b8d4a4;" onmouseenter="tip(event,'Zone B — Center Garden','Herb cluster (rosemary, thyme, sage, oregano — same water needs). Mint in buried pot. Flowers woven throughout: marigolds at every bed edge, calendula, chamomile (self-sows), zinnias, stocks, celosia. Lavender hedge along west. Sunflowers anchor south edge.')" onmouseleave="hideTip()">
+              <div class="gz-lbl">Zone B — Center (Greens, Herbs & Flowers)</div>
+              <div class="gz-crops">🥬 Lettuce · Arugula · Kale · Bok choy · Kohlrabi · Radicchio<br>🌿 Herb cluster · 💐 Flowers woven throughout</div>
+            </div>
+            <div class="mi" style="background:#a8c898;" onmouseenter="tip(event,'Zone C — South Main (Squash Empire)','Paired cattle panel arch (2 panels side by side) — delicata + candy roaster trained up and over. Hubbard, Sweet Meat, pumpkins sprawl out. Solo cattle panel along fence for second cucumbers or late beans. Three Sisters corn block in open ground.')" onmouseleave="hideTip()">
+              <div class="gz-lbl">Zone C — South Main (Big Vines)</div>
+              <div class="gz-crops">🎃 Candy Roaster · Delicata · Golden Hubbard · Black Futsu · Sweet Meat · Pumpkins<br>🌽 Three Sisters corn block · 🌻 Sunflowers south edge</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Food Forest column -->
+        <div class="gz gz-ff" onmouseenter="tip(event,'Food Forest Edge (East Border)','Apple (A) + Cherry (C) trees — young, establishing. Shrubs: Elderberry ×2 (NE corner), Currants ×2 (mid), Blueberries (amended acid bed). Understory: Comfrey (1 per tree), strawberry groundcover, creeping thyme, white clover. Climbing rose on east fence.')" onmouseleave="hideTip()">
+          <div class="gz-tag">Food Forest Edge</div>
+          <div class="gz-lbl">🍎🍒 Orchard + Shrub Layer</div>
+          <div class="gz-crops" style="font-size:0.6rem;">
+            🫐 Elderberry ×2 (NE)<br>
+            🍇 Currants ×2<br>
+            🫐 Blueberries (acid bed)<br>
+            🌿 Comfrey per tree<br>
+            🍓 Strawberry groundcover<br>
+            🌿 Creeping thyme<br>
+            🍀 White clover<br>
+            🌹 Climbing rose (fence)
+          </div>
+        </div>
+
+        <!-- Bathtub -->
+        <div class="gz gz-bath" onmouseenter="tip(event,'🛁 Bathtub Planter','Fast-draining = drought-tolerant plants only. Lavender (central anchor), creeping thyme, sedum Autumn Joy, echinacea, yarrow, portulaca annual filler. Zero irrigation needed. Cut back once in early spring.')" onmouseleave="hideTip()">
+          <div class="gz-tag">Existing Feature</div>
+          <div class="gz-lbl">🛁 Bathtub Planter</div>
+          <div class="gz-crops">Lavender · Thyme · Sedum · Echinacea · Yarrow · Portulaca</div>
+        </div>
+
+        <!-- West border -->
+        <div class="gz gz-west" onmouseenter="tip(event,'Zone D — West Perennial Strip','Peonies (existing — never move!). Lavender hedge (staggered, prune early spring never fall). Knockout shrub rose + Carefree Beauty. Rosa carolina at wild end. Native wildflowers: echinacea, black-eyed Susan, wild bergamot, goldenrod, native aster — bloom May–October continuously.')" onmouseleave="hideTip()">
+          <div class="gz-tag">Perennial Anchor</div>
+          <div class="gz-lbl">🌸 Zone D — West Perennial Strip</div>
+          <div class="gz-crops">Peonies · Lavender hedge · Roses · Native wildflowers · Echinacea · Oregano · Thyme</div>
+        </div>
+
+        <!-- Lower left -->
+        <div class="gz gz-dl" onmouseenter="tip(event,'Lower West — 17ft Open','Perennial herb border: French thyme, oregano, sage, mint (in buried container!). Native wildflower strip along fence. This zone does its job for years with zero maintenance once established.')" onmouseleave="hideTip()">
+          <div class="gz-tag">Zone D continued</div>
+          <div class="gz-lbl">🌿 Lower Herb & Native Strip</div>
+          <div class="gz-crops">Thyme · Oregano · Mint (contained) · Black-eyed Susan · Bergamot · Goldenrod</div>
+        </div>
+
+        <!-- Lower main -->
+        <div class="gz gz-lm" onmouseenter="tip(event,'Zone E — Lower 20×12ft','South-facing slope = warmest zone = perfect for watermelon. Strawberries in existing trellis area (mulch with straw, pinch first flowers in year 1). Watermelon with black plastic mulch. Spring + fall brassicas. Woodchip path leads to orchard.')" onmouseleave="hideTip()">
+          <div class="gz-tag">Zone E — 20×12ft</div>
+          <div class="gz-lbl">🍓 Lower Garden — Warmest Zone</div>
+          <div class="gz-crops">🍓 Strawberries (existing) · 🍉 Watermelon (south slope) · 🥦 Brassicas spring + fall · Woodchip path → orchard</div>
+        </div>
+
+      </div>
+
+      <!-- Orchard row -->
+      <div class="gz gz-orch" style="margin-top:5px;" onmouseenter="tip(event,'Orchard Understory — 49ft','White clover broadcast throughout (fixes nitrogen, feeds trees free). Comfrey (1 per tree, Bocking 14 — sterile). Strawberry groundcover. Creeping thyme along path edges. Daffodil + allium bulbs planted fall 2026 for spring bloom + pest deterrence. Woodchip paths between trees.')" onmouseleave="hideTip()">
+        <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+          <div>
+            <div class="gz-lbl">🍀 Orchard Understory — 49ft wide · Apple (A) + Cherry (C) trees · White clover · Comfrey · Strawberry groundcover · Creeping thyme · Woodchip paths</div>
+          </div>
+          <div class="tree-row" style="margin-left:auto;">
+            <div class="tree t-c">C</div><div class="tree t-a">A</div><div class="tree t-a">A</div>
+            <div class="tree t-c">C</div><div class="tree t-a">A</div><div class="tree t-a">A</div>
+            <div class="tree t-c">C</div><div class="tree t-a">A</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-gate" style="margin-top:5px;">— — — WEST (bottom edge) — — —</div>
+    </div>
+
+    <!-- Legend -->
+    <div class="map-legend">
+      <div class="leg-item"><div class="leg-dot" style="background:#d8c89a;"></div> Coop / Structure</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#c4dab0;"></div> Main Veg Zones (A–C)</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#d4e0c0;"></div> Perennial Strip (D)</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#c8e0c8;"></div> Lower Garden (E)</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#f0e4b4;border:1.5px dashed #b8862a;"></div> Food Forest</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#f2ead0;border:1.5px dashed #b8862a;"></div> Orchard</div>
+      <div class="leg-item"><div class="leg-dot" style="background:repeating-linear-gradient(45deg,#c8a060,#c8a060 3px,#e8d098 3px,#e8d098 9px);"></div> Diamond Paver Path</div>
+    </div>
+  </div>
+
+  <div class="hl" style="margin-top:1rem;">
+    <strong>Tap any zone</strong> on the map for details. <strong>Slope note:</strong> Your garden drains N→S (downhill toward south). Thirsty crops (squash, corn, watermelon) go mid-to-lower. Drought-tolerant herbs + lavender sit higher near the coop. Drip lines run downhill with gravity.
+  </div>
+</div>
+</div>
+
+<!-- Tooltip -->
+<div class="map-tooltip" id="map-tooltip"></div>
+
+<!-- ══════ THIS WEEK ══════ -->
+<div id="s-week" class="section active">
+<div class="content">
+
+  <div class="week-hero">
+    <div class="week-label">Your garden dashboard</div>
+    <div class="week-title" id="week-title">Loading your week...</div>
+    <div class="week-subtitle" id="week-subtitle"></div>
+  </div>
+
+  <div class="week-nav">
+    <button class="week-btn" onclick="jumpWeek(-2)">◀ 2 weeks ago</button>
+    <button class="week-btn" onclick="jumpWeek(-1)">◀ Last week</button>
+    <button class="week-btn active-week" onclick="jumpWeek(0)">Today</button>
+    <button class="week-btn" onclick="jumpWeek(1)">Next week ▶</button>
+    <button class="week-btn" onclick="jumpWeek(2)">In 2 weeks ▶</button>
+    <span class="week-current" id="week-date-label"></span>
+  </div>
+
+  <!-- Task progress -->
+  <div class="card" style="margin-bottom:0.9rem;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;">
+      <div style="font-size:0.75rem;font-weight:600;color:var(--deep);">Week Progress</div>
+      <div style="font-size:0.72rem;color:var(--muted);" id="progress-text">0 of 0 tasks done</div>
+    </div>
+    <div class="progress-wrap"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
+  </div>
+
+  <div class="card" id="task-list-card">
+    <h3 style="margin-bottom:0.8rem;" id="task-list-title">This Week's Tasks</h3>
+    <div id="task-list"></div>
+  </div>
+
+  <div class="card" style="margin-top:0.9rem;">
+    <h3 style="margin-bottom:0.6rem;">🌡 Seasonal Context</h3>
+    <div id="season-context" style="font-size:0.8rem;line-height:1.75;color:#4a4a40;"></div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════ FULL CALENDAR ══════ -->
+<div id="s-calendar" class="section">
+<div class="content">
+  <h2>Full Year Calendar</h2>
+  <p class="intro">Every month's key tasks based on your May 1–15 last frost date in Zone 6b. Tap any month for detail.</p>
+  <div class="cal-grid" id="cal-grid"></div>
+</div>
+</div>
+
+<!-- ══════ SUCCESSION ══════ -->
+<div id="s-succession" class="section">
+<div class="content">
+  <h2>Succession Planting Tracker</h2>
+  <p class="intro">These crops benefit most from staggered sowings — plant every 2–3 weeks for continuous harvest all season. Check off each sowing as you do it.</p>
+
+  <div class="card" style="overflow-x:auto;">
+    <table class="succession-table">
+      <thead>
+        <tr>
+          <th>Crop</th>
+          <th>Sowing 1</th>
+          <th>Sowing 2</th>
+          <th>Sowing 3</th>
+          <th>Sowing 4</th>
+          <th>Why Succession?</th>
+        </tr>
+      </thead>
+      <tbody id="succession-body"></tbody>
+    </table>
+  </div>
+
+  <div class="hl" style="margin-top:1rem;">
+    <strong>Succession rule of thumb:</strong> When your current planting is about 2–3 inches tall, sow the next batch. For heat-sensitive crops (lettuce, arugula, bok choy), stop sowing once daytime temps consistently hit 80°F — switch back to succession in late August for fall.
+  </div>
+</div>
+</div>
+
+<!-- ══════ NOTES ══════ -->
+<div id="s-notes" class="section">
+<div class="content">
+  <h2>My Garden Notes</h2>
+  <p class="intro">Notes save automatically to this browser. Write observations, variety names, what worked, what didn't — your garden journal.</p>
+
+  <div class="zone-notes-grid" id="notes-grid"></div>
+
+  <hr>
+  <h3 style="margin-bottom:0.8rem;">General Journal</h3>
+  <div class="card">
+    <textarea class="note-area" id="journal-area" style="min-height:160px;" placeholder="Freeform garden journal — observations, ideas, questions, weather notes..."></textarea>
+    <div style="display:flex;align-items:center;margin-top:0.5rem;">
+      <button class="note-save" onclick="saveJournal()">Save Journal</button>
+      <span class="note-saved" id="journal-saved">✓ Saved</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════ FULL PLAN ══════ -->
+<div id="s-plan" class="section">
+<div class="content">
+  <h2>Full Garden Plan</h2>
+  <div class="plan-nav">
+    <div class="plan-tab active" onclick="showPlan('zones')">📍 Zones</div>
+    <div class="plan-tab" onclick="showPlan('schedule')">📅 Schedule</div>
+    <div class="plan-tab" onclick="showPlan('companion')">🌿 Companions</div>
+    <div class="plan-tab" onclick="showPlan('water')">💧 Irrigation</div>
+    <div class="plan-tab" onclick="showPlan('foodforest')">🍎 Food Forest</div>
+    <div class="plan-tab" onclick="showPlan('roses')">🌹 Roses</div>
+    <div class="plan-tab" onclick="showPlan('bathtub')">🛁 Bathtub</div>
+  </div>
+
+  <!-- ZONES -->
+  <div id="plan-zones" class="plan-section active">
+
+    <div class="zone-card">
+      <div class="zc-head" style="background:linear-gradient(90deg,#2e6a28,#4a9a44);">
+        <div class="zc-title">Zone A — North Beds · Spring→Summer Rotation</div>
+        <div class="zc-size">53 × ~14ft</div>
+      </div>
+      <div class="zc-body">
+        <strong>Two new 4×8ft raised beds</strong> flank the diamond paver path — first thing you see coming through the main gate.<br><br>
+        <strong>Spring (Bed 1):</strong> Carrots, beets, radish (radish marks slow carrot rows + deters cucumber beetles). Succession lettuce every 2 weeks.<br>
+        <strong>Spring (Bed 2):</strong> Kale, bok choy, kohlrabi, arugula, radicchio. Sugar snap peas climb east fence.<br>
+        <strong>Summer:</strong> Bed 1 → cucumbers on the paired cattle panel arch. Bed 2 → beans (direct sow — follow brassicas, great nitrogen sequence). Corn block in open ground (4×4 min). Tomatoes in existing bed with basil at feet.
+        <div class="tip-box">🌿 <strong>Companion:</strong> Radish deters cucumber beetles — let a few bolt near the arch. Marigolds edge every bed. Nasturtiums at corners trap aphids.</div>
+        <div class="water-box">💧 Soaker hose loops through both raised beds + tomato bed on timer. Corn gets drip emitters.</div>
+      </div>
+    </div>
+
+    <div class="zone-card">
+      <div class="zc-head" style="background:linear-gradient(90deg,#4a7a44,#6aaa64);">
+        <div class="zc-title">Zone B — Center Garden · Greens, Herbs & Flowers</div>
+        <div class="zc-size">53 × ~10ft</div>
+      </div>
+      <div class="zc-body">
+        <strong>The soul of the garden</strong> — what makes it feel lush and alive from the path.<br><br>
+        <strong>Herb cluster:</strong> Rosemary, thyme, sage, oregano grouped together (same water/sun needs, zero maintenance after year 1). <em>Mint in a buried 5-gallon pot — it will escape otherwise.</em><br>
+        <strong>Flower weaving:</strong> Don't row-plant flowers — scatter through every bed. Marigolds at every edge. Calendula between greens. Chamomile self-sows forever. Zinnias, stocks, celosia for height. Sunflowers anchor the south edge, facing out.<br>
+        <strong>Lavender hedge:</strong> Expanded collection along west border. Fragrant hedge over time.
+        <div class="tip-box">🌿 Chamomile improves brassica flavor nearby. Calendula attracts aphid-eating hoverflies. This zone does passive pest management for the whole garden.</div>
+        <div class="water-box">💧 Herbs drought-tolerant after year 1 — no irrigation needed. Flowers get soaker hose first season only.</div>
+      </div>
+    </div>
+
+    <div class="zone-card">
+      <div class="zc-head" style="background:linear-gradient(90deg,#6a5a18,#a08a28);">
+        <div class="zc-title">Zone C — South Main · Squash Empire & Corn</div>
+        <div class="zc-size">53 × ~12ft</div>
+      </div>
+      <div class="zc-body">
+        <strong>Five winter squash + pumpkins</strong> — each vine runs 8–12ft. Wild and lush by August.<br><br>
+        <strong>Paired cattle panel arch:</strong> Two panels side-by-side. Train delicata + candy roaster up and over. Hubbard, Sweet Meat, pumpkins sprawl outward.<br>
+        <strong>Solo cattle panel:</strong> North fence or angled — second cucumber planting or late beans.<br>
+        <strong>Three Sisters block:</strong> Corn (4×4 min) + beans at base after corn is knee-high + squash sprawling out. Self-fertilizing polyculture.
+        <div class="tip-box">🌽 Three Sisters: corn gives structure, beans fix nitrogen (feeds corn free), squash shades soil (moisture + weed suppression). Zero fertilizer needed if done right.</div>
+        <div class="water-box">💧 Drip emitters at base of each squash hill. Water deeply 2× per week — builds deep roots, reduces mid-season workload.</div>
+      </div>
+    </div>
+
+    <div class="zone-card">
+      <div class="zc-head" style="background:linear-gradient(90deg,#5a4a90,#7a6ab0);">
+        <div class="zc-title">Zone D — West 17ft Strip · Perennial Foundation</div>
+        <div class="zc-size">17ft wide</div>
+      </div>
+      <div class="zc-body">
+        <strong>Plant once, maintain almost never.</strong> This zone does its job for decades.<br><br>
+        Peonies stay. Lavender hedge (staggered, not perfectly spaced — prune early spring, never into old wood). Native wildflower strip: echinacea, black-eyed Susan, wild bergamot, clump-forming goldenrod, native aster — blooming May through October. Knockout shrub rose as anchor. Alliums/chives at rose feet.
+        <div class="tip-box">🌿 This strip is a permanent insectary — year-round habitat for beneficial insects that control pests throughout your vegetable beds passively.</div>
+        <div class="water-box">💧 Zero irrigation after year 1. Hand water once a week to establish in 2026. That's it forever.</div>
+      </div>
+    </div>
+
+    <div class="zone-card">
+      <div class="zc-head" style="background:linear-gradient(90deg,#8a3a50,#b85a70);">
+        <div class="zc-title">Zone E — Lower 20×12ft · Strawberries, Watermelon & Brassicas</div>
+        <div class="zc-size">20 × 12ft</div>
+      </div>
+      <div class="zc-body">
+        <strong>South-facing slope = warmest zone</strong> — perfect for watermelon.<br><br>
+        Strawberries (existing trellis area) — mulch with straw, consider pinching first flowers in year 1. Watermelon on the south slope with black plastic mulch. Spring brassicas (transplant 4–6 wks before last frost), then fall brassicas (start indoors mid-July, transplant August — better than spring!). Woodchip path to orchard.
+        <div class="tip-box">🌿 Dill near brassicas attracts parasitic wasps that hunt cabbage worms. Nasturtiums trap aphids. Watermelon loves being near corn for wind shelter.</div>
+        <div class="water-box">💧 Soaker hose through strawberry bed. Drip emitter per watermelon hill. Soaker through brassicas — critical during head formation.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SCHEDULE -->
+  <div id="plan-schedule" class="plan-section">
+
+    <div class="sched-block">
+      <div class="sb-head sb-spring">🌱 Late Winter — Start Indoors (Feb–March)</div>
+      <div class="sb-body">
+        <div class="cr hdr"><div>Crop</div><div>Start</div><div>Zone</div><div>Notes</div></div>
+        <div class="cr"><div class="cn">Tomatoes</div><div class="ct">6–8 wks before LFD</div><div class="cz">Existing bed</div><div class="cn-note">Pot up once. Harden off 7–10 days before transplant.</div></div>
+        <div class="cr"><div class="cn">Cabbage, Broccoli, Cauliflower</div><div class="ct">6–8 wks before LFD</div><div class="cz">Zone E</div><div class="cn-note">Transplant OUT 4–6 wks before LFD — they love cold</div></div>
+        <div class="cr"><div class="cn">Stocks, Celosia, Zinnias</div><div class="ct">6–8 wks before LFD</div><div class="cz">Zone B</div><div class="cn-note">Stocks especially — hates heat, needs early start</div></div>
+        <div class="cr"><div class="cn">Rosemary, Sage, Thyme</div><div class="ct">8–10 wks before LFD</div><div class="cz">Zone B/D</div><div class="cn-note">Slow germinators — or buy transplants (easier)</div></div>
+        <div class="cr"><div class="cn">Marigolds, Calendula</div><div class="ct">6 wks before LFD</div><div class="cz">All zones</div><div class="cn-note">Start enough for every bed edge — your pest defense</div></div>
+      </div>
+    </div>
+
+    <div class="sched-block">
+      <div class="sb-head sb-spring">🥬 Early Spring — Direct Sow Outside (March–April)</div>
+      <div class="sb-body">
+        <div class="cr hdr"><div>Crop</div><div>Timing</div><div>Zone</div><div>Notes</div></div>
+        <div class="cr"><div class="cn">Carrots, Beets, Radish</div><div class="ct">As soon as soil workable</div><div class="cz">Zone A · Bed 1</div><div class="cn-note">Radish in 25 days, marks carrot rows, deters cucumber beetles</div></div>
+        <div class="cr"><div class="cn">Romaine, Butter Head, Arugula</div><div class="ct">4–6 wks before LFD</div><div class="cz">Zone B</div><div class="cn-note">Sow every 2 weeks — cut-and-come-again</div></div>
+        <div class="cr"><div class="cn">Kale, Bok Choy, Kohlrabi, Radicchio</div><div class="ct">4–6 wks before LFD</div><div class="cz">Zone A · Bed 2</div><div class="cn-note">Bok choy bolts in heat — harvest before June</div></div>
+        <div class="cr"><div class="cn">Sugar Snap Peas</div><div class="ct">4–6 wks before LFD</div><div class="cz">East fence</div><div class="cn-note">Direct sow. Climb fence naturally. Pull when heat hits.</div></div>
+        <div class="cr"><div class="cn">Chamomile</div><div class="ct">Early spring — surface sow</div><div class="cz">Zone B</div><div class="cn-note">Press onto soil surface — needs light to germinate, don't cover</div></div>
+        <div class="cr"><div class="cn">White clover (orchard)</div><div class="ct">Early spring</div><div class="cz">Orchard floor</div><div class="cn-note">Broadcast around tree drip lines. Self-maintains indefinitely.</div></div>
+      </div>
+    </div>
+
+    <div class="sched-block">
+      <div class="sb-head sb-summer">☀️ After Last Frost — Warm Season (May–June)</div>
+      <div class="sb-body">
+        <div class="cr hdr"><div>Crop</div><div>Method</div><div>Zone</div><div>Notes</div></div>
+        <div class="cr"><div class="cn">Cucumbers</div><div class="ct">✅ Start indoors 3–4 wks early</div><div class="cz">Zone A · Cattle panel arch</div><div class="cn-note">Biodegradable pots. Don't start too early — root-bound = stunted.</div></div>
+        <div class="cr"><div class="cn">Beans</div><div class="ct">❌ Direct sow ONLY after frost</div><div class="cz">Zone A / Three Sisters</div><div class="cn-note">Never transplant beans. Direct sow at 60°F+ soil. 7–10 day germ.</div></div>
+        <div class="cr"><div class="cn">Corn</div><div class="ct">Direct sow after LFD</div><div class="cz">Zone C (block)</div><div class="cn-note">4×4 block minimum for wind pollination.</div></div>
+        <div class="cr"><div class="cn">All Squash + Pumpkins</div><div class="ct">Start indoors 3–4 wks OR direct sow</div><div class="cz">Zone C</div><div class="cn-note">Large cells only — hate root disturbance.</div></div>
+        <div class="cr"><div class="cn">Watermelon</div><div class="ct">Start indoors 3–4 wks before LFD</div><div class="cz">Zone E (south slope)</div><div class="cn-note">Black plastic mulch = dramatically better harvest.</div></div>
+        <div class="cr"><div class="cn">Basil</div><div class="ct">Transplant after nights above 50°F</div><div class="cz">With tomatoes</div><div class="cn-note">Cold stunts basil permanently — wait.</div></div>
+        <div class="cr"><div class="cn">Sunflowers, Zinnias</div><div class="ct">Direct sow, 2-week waves</div><div class="cz">Zone B/C edges</div><div class="cn-note">Sow through June for continuous blooms.</div></div>
+      </div>
+    </div>
+
+    <div class="sched-block">
+      <div class="sb-head sb-fall">🍂 Late Summer — Fall Crops (July–August)</div>
+      <div class="sb-body">
+        <div class="cr hdr"><div>Crop</div><div>Sow Date</div><div>Zone</div><div>Notes</div></div>
+        <div class="cr"><div class="cn">Broccoli, Cabbage (fall)</div><div class="ct">Start indoors mid-July</div><div class="cz">Zone E</div><div class="cn-note">Transplant August. Frost sweetens them.</div></div>
+        <div class="cr"><div class="cn">Kale (fall crop)</div><div class="ct">8 wks before first fall frost</div><div class="cz">Zone A or B</div><div class="cn-note">Overwinters in zone 6b with light mulch.</div></div>
+        <div class="cr"><div class="cn">Radicchio (fall crop)</div><div class="ct">10–12 wks before first frost</div><div class="cz">Zone B</div><div class="cn-note">Best heads form in cool fall weather.</div></div>
+        <div class="cr"><div class="cn">Cover Crop</div><div class="ct">Immediately after clearing beds</div><div class="cz">All empty beds</div><div class="cn-note">Never leave soil bare. Sow the same day you clear.</div></div>
+      </div>
+    </div>
+
+    <div class="sched-block">
+      <div class="sb-head sb-peren">🌿 Plant Once, Enjoy Forever — Perennials (Spring 2026)</div>
+      <div class="sb-body">
+        <div class="cr hdr"><div>Plant</div><div>When</div><div>Zone</div><div>Notes</div></div>
+        <div class="cr"><div class="cn">Lavender (multiple)</div><div class="ct">Spring, after LFD</div><div class="cz">Zone D + Bathtub</div><div class="cn-note">Lean soil, well-drained. Don't over-amend.</div></div>
+        <div class="cr"><div class="cn">Comfrey (Bocking 14)</div><div class="ct">Spring — crowns</div><div class="cz">Under each fruit tree</div><div class="cn-note">Sterile — won't spread. Chop-and-drop all season.</div></div>
+        <div class="cr"><div class="cn">Elderberry (×2)</div><div class="ct">Early spring</div><div class="cz">NE corner food forest</div><div class="cn-note">2 for cross-pollination. Fast — 2–3ft first year.</div></div>
+        <div class="cr"><div class="cn">Currants (×2)</div><div class="ct">Early spring bare root</div><div class="cz">Food forest border</div><div class="cn-note">Black or red. Very productive zone 6.</div></div>
+        <div class="cr"><div class="cn">Blueberries (×2 varieties)</div><div class="ct">Early spring</div><div class="cz">Amended acid bed</div><div class="cn-note">pH 4.5–5.5 with sulfur + peat. 2 varieties for cross-pol.</div></div>
+        <div class="cr"><div class="cn">Roses (shrub + climbing)</div><div class="ct">Early spring bare root or May</div><div class="cz">Zone D + east fence + arch</div><div class="cn-note">See Roses tab. All disease-resistant — no spraying.</div></div>
+        <div class="cr"><div class="cn">Native wildflowers</div><div class="ct">Spring or fall</div><div class="cz">Zone D border</div><div class="cn-note">Echinacea, black-eyed Susan, wild bergamot, goldenrod, aster.</div></div>
+        <div class="cr"><div class="cn">Strawberry crowns</div><div class="ct">Early spring</div><div class="cz">Zone E + orchard floor</div><div class="cn-note">Pinch first flowers in year 1 for bigger year 2 harvest.</div></div>
+        <div class="cr"><div class="cn">Creeping thyme</div><div class="ct">Spring</div><div class="cz">Orchard floor + path edges</div><div class="cn-note">Plugs spread quickly. Fragrant, walkable, drought-proof.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPANION -->
+  <div id="plan-companion" class="plan-section">
+    <div class="companion-grid">
+      <div class="cc"><div class="cc-t">🍅 Tomatoes + Basil</div><div class="cc-b">Basil at tomato feet confuses thrips and aphids with volatile oils. Also improves tomato flavor. One basil per tomato.</div></div>
+      <div class="cc gold"><div class="cc-t">🌽 Three Sisters (Corn+Beans+Squash)</div><div class="cc-b">Corn gives structure, beans fix nitrogen free, squash shades soil suppressing weeds. The most proven polyculture in history.</div></div>
+      <div class="cc rust"><div class="cc-t">🥒 Cucumbers + Radish + Nasturtium</div><div class="cc-b">Radish deters cucumber beetles. Let a few bolt near arches. Nasturtiums trap aphids away from cucumbers.</div></div>
+      <div class="cc lav"><div class="cc-t">🥦 Brassicas + Dill + Chamomile</div><div class="cc-b">Dill attracts wasps that hunt cabbage worms. Chamomile improves brassica growth and flavor nearby.</div></div>
+      <div class="cc"><div class="cc-t">🌸 Marigolds — Everywhere</div><div class="cc-b">French marigolds kill soil nematodes for years. Edge every bed. Repels whitefly, attracts predatory insects. Non-negotiable.</div></div>
+      <div class="cc gold"><div class="cc-t">🍎 Comfrey Under Fruit Trees</div><div class="cc-b">Deep taproots mine potassium + calcium. Chop leaves and drop as mulch 3–4× per season. Free mineral-rich fertilizer.</div></div>
+      <div class="cc rust"><div class="cc-t">🍀 White Clover Living Mulch</div><div class="cc-b">Fixes nitrogen into soil. Feeds apple + cherry trees free year after year. Feeds bees May through October.</div></div>
+      <div class="cc lav"><div class="cc-t">💐 Calendula — Garden Healer</div><div class="cc-b">Attracts hoverflies whose larvae eat aphids at extraordinary rates. Self-sows forever — plant once.</div></div>
+      <div class="cc"><div class="cc-t">💜 Lavender + Everything</div><div class="cc-b">Confuses cabbage moths, aphids, deer. Attracts bees from a mile away — critical for fruit tree pollination.</div></div>
+      <div class="cc gold"><div class="cc-t">🧅 Alliums Near Roses</div><div class="cc-b">Chives/ornamental alliums at rose bases repel aphids and black spot. Bloom beautifully in spring. Dramatically reduces rose maintenance.</div></div>
+      <div class="cc rust"><div class="cc-t">🌻 Sunflowers + Cucumbers</div><div class="cc-b">Sunflowers trap aphids away from cucumbers. Provide windbreak. Bees visiting sunflowers also pollinate cucumbers.</div></div>
+      <div class="cc lav"><div class="cc-t">🫐 Elderberry Border</div><div class="cc-b">Windbreak for whole garden. Pollinators love flat flower clusters — critical for fruit trees. Distracts birds from other crops.</div></div>
+    </div>
+  </div>
+
+  <!-- WATER -->
+  <div id="plan-water" class="plan-section">
+    <div class="hl"><strong>Core strategy:</strong> Single ¾" hose from house → battery timer at garden entry → ½" poly drip tubing through zones → soaker hose or emitters at plants. Timer handles beds automatically. You do a daily 10-min check with the hose for anything extra.</div>
+    <div class="irr-grid">
+      <div class="irr"><div class="irr-t">1. Main Hose Run</div><div class="irr-b">Quality ¾" <strong>rubber hose</strong> (not vinyl — cracks in cold) from house to garden. Coil slack near main gate. Connect to splitter inside garden for two zones at once.</div></div>
+      <div class="irr gold"><div class="irr-t">2. Battery Timer ← Most Important Buy</div><div class="irr-b"><strong>Orbit or Rain Bird battery timer</strong> (~$25–40) at garden entry. Set for 5–7am watering. Beds water while you sleep. Replace batteries once a season.</div></div>
+      <div class="irr sage"><div class="irr-t">3. Raised Beds — Soaker Hose</div><div class="irr-b">Soaker hose looped through both new raised beds + tomato bed. Even, low-pressure, no wet foliage (reduces disease). 30–45 min every other day on timer.</div></div>
+      <div class="irr"><div class="irr-t">4. Squash, Corn, Watermelon — Drip</div><div class="irr-b">½" poly tubing through Zone C with 1 GPH drip emitters at each hill. Water deeply 2× per week — builds deep roots, reduces your mid-summer workload.</div></div>
+      <div class="irr rust"><div class="irr-t">5. Strawberries — Soaker Hose</div><div class="irr-b">Soaker hose loop through strawberry bed. Mulch heavily with straw over hose — cuts evaporation 50%, keeps berries clean.</div></div>
+      <div class="irr gold"><div class="irr-t">6. Your Daily Walk</div><div class="irr-b">Timer handles beds. Your job: 10 min daily with hose for new transplants, watermelon at fruit set, corn tasseling in dry weeks. Walk, check, enjoy.</div></div>
+    </div>
+    <div class="hl"><strong>Budget ~$200–$310 total.</strong> Buy brass fittings — not plastic — at every connection. Poly tubing and soaker hose last 5–8 years. The timer is the only thing you'll replace every few years. Fully repairable with a $3 coupler.</div>
+  </div>
+
+  <!-- FOOD FOREST -->
+  <div id="plan-foodforest" class="plan-section">
+    <div class="ff-layer"><div class="ff-lbl ff-canopy">Canopy</div><div class="ff-cnt"><strong>Apple (A) + Cherry (C) trees</strong> — young now, canopy in 5–7 years. Mulch 3–4ft radius with wood chips immediately. Thin fruit clusters in June once bearing.</div></div>
+    <div class="ff-layer"><div class="ff-lbl ff-shrub">Shrubs</div><div class="ff-cnt"><strong>Elderberry ×2</strong> (NE corner — windbreak, flowers in June, berries in August, pollinator magnet). <strong>Currants ×2</strong> (mid-border, shade-tolerant, prolific). <strong>Blueberries ×2 varieties</strong> (amended acid bed, pH 4.5–5.5, fruit more heavily every year for 20+ years).</div></div>
+    <div class="ff-layer"><div class="ff-lbl ff-herb">Herbs</div><div class="ff-cnt"><strong>Comfrey Bocking 14</strong> — 1 crown per fruit tree, 2ft from trunk. Chop leaves 3–4× per season, drop as mulch. Sterile — won't spread. <strong>Lavender</strong> along path edge — critical for pollinator attraction during apple/cherry blossom.</div></div>
+    <div class="ff-layer"><div class="ff-lbl ff-ground">Ground</div><div class="ff-cnt"><strong>White clover</strong> broadcast throughout — fixes nitrogen, feeds trees free, feeds bees continuously. <strong>Strawberries</strong> as groundcover between trees. <strong>Creeping thyme</strong> along path edges — walkable, fragrant, drought-proof.</div></div>
+    <div class="ff-layer"><div class="ff-lbl ff-root">Roots</div><div class="ff-cnt"><strong>Daffodil + allium bulbs</strong> — plant in fall 2026 throughout orchard. Emerge in spring, deter deer + rodents (both toxic to them), flowers are stunning. Foliage disappears by summer. Once-and-done planting that grows bigger every year.</div></div>
+    <div class="hl" style="margin-top:1rem;"><strong>Year 1:</strong> Sparse — normal. <strong>Year 2:</strong> Strawberries fruit, currants produce first crop, elderberry flowers. <strong>Year 3–4:</strong> Blueberries producing seriously, elderberry full harvest, clover permanently established. <strong>Year 5+:</strong> A real food forest — self-managing, harvesting May through October.</div>
+  </div>
+
+  <!-- ROSES -->
+  <div id="plan-roses" class="plan-section">
+    <div class="hl"><strong>Golden rule:</strong> All roses below are disease-resistant — no spraying required. Plant alliums/chives at every rose's feet. Mulch well. That's the maintenance.</div>
+    <h3 style="margin-bottom:0.7rem;">Climbing Roses</h3>
+    <div class="rose-grid">
+      <div class="rc"><div class="rc-type">Climbing · Zone 5–9 · Repeat Bloomer</div><div class="rc-name">🌹 'New Dawn'</div><div class="rc-desc">Most famous climbing rose. Soft blush-pink, incredible fragrance, blooms June then repeats in fall. Covers your east fence in 3 years. Nearly indestructible. Edible hips in fall.</div></div>
+      <div class="rc"><div class="rc-type">Climbing · Zone 5–9 · Thornless!</div><div class="rc-name">🌹 'Zéphirine Drouhin'</div><div class="rc-desc">The only truly thornless climber. Deep cerise-pink, intensely fragrant. Perfect for the cattle panel arch — no thorns means no snagging as you walk through daily. Repeat bloomer.</div></div>
+    </div>
+    <h3 style="margin-bottom:0.7rem; margin-top:1.1rem;">Shrub Roses</h3>
+    <div class="rose-grid">
+      <div class="rc"><div class="rc-type">Shrub · Zone 4–9 · Bulletproof</div><div class="rc-name">🌸 'Carefree Beauty'</div><div class="rc-desc">Large warm pink blooms, very fragrant, blooms all season without deadheading, zero disease. 4–5ft rounded shrub. Large orange hips in fall that birds love.</div></div>
+      <div class="rc"><div class="rc-type">Shrub · Zone 4–9 · Native Species</div><div class="rc-name">🌸 Rosa carolina (Pasture Rose)</div><div class="rc-desc">Native rose of the eastern US. Non-invasive, single pink blooms loved by native bees, brilliant red hips. 3ft, spreads slowly by suckers (easily managed). Wild and natural feel.</div></div>
+      <div class="rc"><div class="rc-type">Shrub · Zone 4–9 · Continuous Bloom</div><div class="rc-name">🌸 'Knock Out' Rose</div><div class="rc-desc">Most disease-resistant rose ever developed. Blooms May through frost without deadheading. Cherry red or pink. Virtually impossible to kill. 6 months of color, zero effort.</div></div>
+      <div class="rc"><div class="rc-type">Shrub · Zone 4–8 · Fragrant + Edible Hips</div><div class="rc-name">🌸 'Thérèse Bugnet'</div><div class="rc-desc">Rugosa hybrid — spicy fragrant, lilac-pink, repeats all season. Large edible hips high in Vitamin C. Thrives in poor soil. Gorgeous fall color. Almost no care needed.</div></div>
+    </div>
+    <div class="hl" style="margin-top:1rem;">
+      <strong>East fence:</strong> 'New Dawn' — train horizontally for maximum bloom coverage.<br>
+      <strong>Cattle panel arch:</strong> 'Zéphirine Drouhin' — one on each side, thornless for daily walk-through.<br>
+      <strong>Zone D west border:</strong> 'Carefree Beauty' + 'Knock Out' as anchors. Rosa carolina at the wild end.<br>
+      <strong>Food forest corner:</strong> 'Thérèse Bugnet' rugosa — edible hips, feeds birds, looks stunning.
+    </div>
+  </div>
+
+  <!-- BATHTUB -->
+  <div id="plan-bathtub" class="plan-section">
+    <div class="hl">Water drains straight out — so this needs plants that genuinely thrive in dry, well-drained, full-sun conditions. In zone 6b this gives you a beautiful drought-tolerant palette.</div>
+    <div class="bathtub-grid">
+      <div class="bt-card"><div class="bt-name">💜 Lavender</div><div class="bt-desc">1–2 plants as central anchor. Spills beautifully over tub edge. Fragrant, drought-proof, pollinators adore it.</div></div>
+      <div class="bt-card"><div class="bt-name">🌿 Creeping Thyme</div><div class="bt-desc">Spreads to fill gaps. Fragrant when brushed. Tiny pink flowers. Walkable and virtually indestructible.</div></div>
+      <div class="bt-card"><div class="bt-name">🌸 Sedum 'Autumn Joy'</div><div class="bt-desc">Perennial, structural, turns copper-red in fall. Pollinators love it. Zero care — cut back in early spring.</div></div>
+      <div class="bt-card"><div class="bt-name">🌸 Echinacea</div><div class="bt-desc">One plant as a tall statement. Native, zero care, pollinators love it. Seedheads feed birds in winter.</div></div>
+      <div class="bt-card"><div class="bt-name">🌼 Yarrow (native)</div><div class="bt-desc">Ferny foliage, flat flower heads, butterflies adore it. Yellow or white. Extremely drought-tolerant once established.</div></div>
+      <div class="bt-card"><div class="bt-name">🌺 Portulaca (annual filler)</div><div class="bt-desc">Spills over edges in jewel colors. Thrives in heat and drought. Self-sows modestly. No deadheading needed.</div></div>
+    </div>
+    <div class="hl"><strong>Zero irrigation needed.</strong> No deadheading required for most of these. Just cut back in early spring once a year. This becomes a permanent pollinator magnet right next to the coop.</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════ HOST / GET A LINK ══════ -->
+<div id="s-host" class="section">
+<div class="content">
+  <h2>Get Your Garden App Online</h2>
+  <p class="intro">The easiest free way to get a real link you can bookmark on your phone and share with anyone — no coding required. Takes about 10 minutes.</p>
+
+  <div class="hl">
+    <strong>Best option for you: GitHub Pages.</strong> It's free forever, gives you a real URL like <span class="code-pill">yourusername.github.io/my-garden</span>, works on any phone or computer, and your notes + task checkoffs save locally in your browser on each device.
+  </div>
+
+  <div class="card">
+    <h3 style="margin-bottom:1rem;">Step-by-Step: Get Your Link in 10 Minutes</h3>
+    <div class="step-list">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Download this file.</strong> Click the download button above to save <span class="code-pill">garden-app-2026.html</span> to your computer.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Create a free GitHub account.</strong> Go to <strong>github.com</strong> and sign up. It's free and takes 2 minutes. Choose any username — it'll appear in your URL.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Create a new repository.</strong> Click the <span class="code-pill">+</span> in the top right → "New repository". Name it <span class="code-pill">my-garden</span>. Set it to <strong>Public</strong>. Check "Add a README file". Click "Create repository".
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Upload your garden file.</strong> In your new repository, click "Add file" → "Upload files". Drag your <span class="code-pill">garden-app-2026.html</span> file in. <strong>Important:</strong> Rename it to <span class="code-pill">index.html</span> before uploading (or rename it on your computer first). Click "Commit changes".
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <strong>Turn on GitHub Pages.</strong> In your repository, click "Settings" → "Pages" (in the left sidebar). Under "Source", select <strong>Deploy from a branch</strong>. Set branch to <span class="code-pill">main</span> and folder to <span class="code-pill">/ (root)</span>. Click Save.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <strong>Wait 2–3 minutes, then visit your link.</strong> Your garden app will be live at: <span class="code-pill">https://yourusername.github.io/my-garden</span>. Bookmark it on your phone's home screen for instant access.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-content">
+          <strong>Add to your phone's home screen.</strong> On iPhone: open the link in Safari → tap the Share button → "Add to Home Screen". On Android: open in Chrome → tap the 3-dot menu → "Add to Home Screen". Now it works like an app!
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="hl">
+    <strong>Important about notes + tasks:</strong> Your notes and task checkoffs save to your browser's local storage on each device. They'll persist as long as you use the same browser and don't clear your browser data. For now this means notes on your phone are separate from notes on your computer — that's a limitation of this simple approach. If you want notes synced across devices in the future, ask Claude about adding a simple backend (it's a next step, not necessary now).
+  </div>
+
+  <div class="card">
+    <h3 style="margin-bottom:0.6rem;">To Update Your App in the Future</h3>
+    <div style="font-size:0.82rem;line-height:1.75;color:#4a4a40;">
+      If you want to make changes — add crops, update notes in the plan, etc. — just download the updated file from Claude, rename it <span class="code-pill">index.html</span>, and re-upload it to your GitHub repository. GitHub Pages automatically updates your live link within a few minutes.
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer>
+  "To plant a garden is to believe in tomorrow." 🌿 Your Garden of Eden — 2026
+</footer>
+
+<script>
+// ══════ DATA ══════
+
+const LAST_FROST = new Date('2026-05-08'); // May 1–15 midpoint
+const FIRST_FROST = new Date('2026-10-15');
+
+// Weekly tasks keyed by month (1-12) and rough week (1-4)
+const weeklyTasks = {
+  1: { // January
+    title: "Deep Winter — Plan & Order",
+    subtitle: "Seed catalogs, garden sketches, order early",
+    context: "Ground is frozen. This is planning season. Order seeds now before popular varieties sell out — especially heirloom squash, specialty tomatoes, and unusual herbs.",
+    tasks: [
+      { text: "Order tomato seeds — start them in ~6 weeks", tag: "Seeds", priority: "high" },
+      { text: "Order squash + pumpkin seeds (Candy Roaster, Delicata, Golden Hubbard, Black Futsu, Sweet Meat)", tag: "Seeds", priority: "high" },
+      { text: "Order flower seeds — zinnias, marigolds, calendula, stocks, celosia, chamomile", tag: "Seeds", priority: "med" },
+      { text: "Order herb seeds — basil, chamomile, oregano (or plan to buy transplants)", tag: "Seeds", priority: "med" },
+      { text: "Plan raised bed placement and purchase lumber if building new beds", tag: "Infrastructure", priority: "med" },
+      { text: "Order drip irrigation supplies — timer, soaker hose, poly tubing, emitters", tag: "Irrigation", priority: "high" },
+      { text: "Research and order rose bare-root plants (New Dawn, Zéphirine Drouhin, Carefree Beauty, Knock Out)", tag: "Perennials", priority: "med" },
+    ]
+  },
+  2: { // February
+    title: "Late Winter — First Seeds Indoors",
+    subtitle: "Start the slow-growing crops now",
+    context: "Last frost is May 1–15, so 6–8 weeks before that means starting in mid-to-late March for most crops. But slow growers like rosemary, sage, and some flowers need 8–10 weeks — start those now.",
+    tasks: [
+      { text: "Start rosemary + sage seeds indoors (8–10 wks before last frost) — or plan to buy transplants", tag: "Indoors", priority: "high" },
+      { text: "Start stocks + celosia indoors (these need a long head start)", tag: "Flowers", priority: "high" },
+      { text: "Order elderberry, currant, and blueberry plants — they ship bare root in early spring", tag: "Food Forest", priority: "high" },
+      { text: "Order comfrey crowns (Bocking 14) and lavender plugs", tag: "Perennials", priority: "med" },
+      { text: "Order strawberry crowns for Zone E and orchard understory", tag: "Food Forest", priority: "med" },
+      { text: "Build or assemble the 2 new raised beds", tag: "Infrastructure", priority: "high" },
+      { text: "Plan and purchase cattle panel arch materials", tag: "Infrastructure", priority: "med" },
+    ]
+  },
+  3: { // March
+    title: "Early Spring — Seeds Ramp Up",
+    subtitle: "Indoors AND first direct sowing begins",
+    context: "Soil is starting to warm and dry out. You can direct sow cold-hardy crops as soon as you can work the soil — usually mid-to-late March in Zone 6b. Start warm-season crops indoors now.",
+    tasks: [
+      { text: "Start tomatoes indoors (6–8 wks before last frost = mid-March start)", tag: "Indoors", priority: "high" },
+      { text: "Start cabbage, broccoli, cauliflower indoors (transplant out in 4–6 weeks)", tag: "Indoors", priority: "high" },
+      { text: "Start marigolds + calendula + zinnias indoors", tag: "Flowers", priority: "high" },
+      { text: "Direct sow: carrots, beets, radish as soon as soil is workable", tag: "Direct Sow", priority: "high" },
+      { text: "Direct sow: sugar snap peas on east fence", tag: "Direct Sow", priority: "high" },
+      { text: "Direct sow: lettuce, arugula, kale, bok choy, kohlrabi, radicchio", tag: "Direct Sow", priority: "high" },
+      { text: "Surface sow chamomile (press onto soil — needs light to germinate)", tag: "Direct Sow", priority: "med" },
+      { text: "Install battery-powered hose timer at garden entry", tag: "Irrigation", priority: "high" },
+      { text: "Begin laying out soaker hose in raised beds", tag: "Irrigation", priority: "med" },
+      { text: "Broadcast white clover seed throughout orchard floor", tag: "Food Forest", priority: "med" },
+    ]
+  },
+  4: { // April
+    title: "Spring — Plant Out & Harden Off",
+    subtitle: "Transplant cold-tolerant crops, keep warm crops cozy",
+    context: "Frosts are still possible until May 1–15. Transplant brassicas and cold-tolerant crops outdoors — they can handle light frost. Keep tomatoes, squash, peppers inside. Harden everything off before transplanting.",
+    tasks: [
+      { text: "Transplant cabbage, broccoli, cauliflower outdoors (they tolerate frost)", tag: "Transplant", priority: "high" },
+      { text: "Succession sow #2: lettuce, arugula, radish (every 2 weeks)", tag: "Succession", priority: "high" },
+      { text: "Harden off tomatoes: 1 hour outside day 1, increase daily over 7–10 days", tag: "Indoors", priority: "high" },
+      { text: "Plant bare-root roses, elderberry, currants (fine before last frost)", tag: "Perennials", priority: "high" },
+      { text: "Plant lavender, comfrey crowns, strawberry crowns", tag: "Perennials", priority: "high" },
+      { text: "Amend blueberry bed with sulfur + peat moss (target pH 4.5–5.5)", tag: "Food Forest", priority: "high" },
+      { text: "Install cattle panel arch over diamond paver path", tag: "Infrastructure", priority: "med" },
+      { text: "Install paired cattle panel arch in Zone C", tag: "Infrastructure", priority: "med" },
+      { text: "Mulch orchard tree drip lines with wood chips (3–4ft radius each)", tag: "Food Forest", priority: "med" },
+      { text: "Start cucumbers + squash indoors (3–4 wks before last frost)", tag: "Indoors", priority: "high" },
+      { text: "Start watermelon indoors (3–4 wks before last frost)", tag: "Indoors", priority: "high" },
+    ]
+  },
+  5: { // May
+    title: "After Last Frost — Plant Everything",
+    subtitle: "The big push — last frost May 1–15",
+    context: "Once you're past May 15, all cold risk is gone. This is the most exciting planting week of the year. Everything goes in. Do a big day and get it all in the ground.",
+    tasks: [
+      { text: "Transplant tomatoes outside after last frost — basil at their feet", tag: "Transplant", priority: "high" },
+      { text: "Transplant cucumbers to cattle panel arch", tag: "Transplant", priority: "high" },
+      { text: "Transplant squash + pumpkin seedlings to Zone C", tag: "Transplant", priority: "high" },
+      { text: "Transplant watermelon to Zone E south slope — add black plastic mulch", tag: "Transplant", priority: "high" },
+      { text: "Direct sow beans (NEVER transplant — direct sow only)", tag: "Direct Sow", priority: "high" },
+      { text: "Direct sow corn in 4×4 block (not a row — needs block for pollination)", tag: "Direct Sow", priority: "high" },
+      { text: "Direct sow sunflowers + first wave of zinnias along south edge", tag: "Flowers", priority: "med" },
+      { text: "Plant blueberry plants in amended bed", tag: "Food Forest", priority: "high" },
+      { text: "Succession sow #3: lettuce, arugula (stop by June in heat)", tag: "Succession", priority: "med" },
+      { text: "Plant marigold transplants at edge of every bed", tag: "Flowers", priority: "high" },
+      { text: "Set up and test drip emitters in Zone C (squash/corn/watermelon)", tag: "Irrigation", priority: "high" },
+      { text: "Lay diamond pavers on main path", tag: "Infrastructure", priority: "med" },
+    ]
+  },
+  6: { // June
+    title: "Early Summer — Maintain & Succession",
+    subtitle: "Keep up with fast-growing crops and start successions",
+    context: "The garden is really going now. Squash, cucumbers, and tomatoes are pushing hard. Stay ahead of weeds with mulch — a thick layer now saves hours of work later. Your marigolds and calendula are your pest defense.",
+    tasks: [
+      { text: "Second wave sunflowers + zinnias — direct sow for continuous blooms", tag: "Succession", priority: "med" },
+      { text: "Thin corn to strongest plants if overcrowded", tag: "Maintenance", priority: "med" },
+      { text: "Mulch all beds 2–3 inches deep — saves huge water and weeding time", tag: "Maintenance", priority: "high" },
+      { text: "Interplant beans at base of corn once corn is knee-high (Three Sisters)", tag: "Succession", priority: "high" },
+      { text: "Harvest radish, first lettuces, snap peas", tag: "Harvest", priority: "high" },
+      { text: "Train cucumbers and smaller squash onto cattle panel arches", tag: "Maintenance", priority: "med" },
+      { text: "Chop-and-drop comfrey leaves around fruit trees for first time", tag: "Food Forest", priority: "med" },
+      { text: "Check drip emitters — clear any clogs", tag: "Irrigation", priority: "med" },
+      { text: "Pinch off watermelon flowers until plants are well established", tag: "Maintenance", priority: "med" },
+    ]
+  },
+  7: { // July
+    title: "Peak Summer — Harvest & Fall Prep",
+    subtitle: "Cucumbers, beans, and zucchini need daily checking",
+    context: "July is peak abundance — and peak work. Cucumbers and beans need harvesting every 2 days or they stop producing. Start your fall brassicas indoors now — they'll go out in August for the fall harvest.",
+    tasks: [
+      { text: "Start fall brassicas indoors — cabbage, broccoli, cauliflower (mid-July)", tag: "Indoors", priority: "high" },
+      { text: "Harvest cucumbers and beans every 2 days — don't let them get overripe", tag: "Harvest", priority: "high" },
+      { text: "Third wave zinnias + marigolds — sow for late summer blooms", tag: "Succession", priority: "low" },
+      { text: "Water deeply 2× per week for squash and corn — not shallow daily", tag: "Irrigation", priority: "high" },
+      { text: "Second chop-and-drop of comfrey around fruit trees", tag: "Food Forest", priority: "med" },
+      { text: "Start radicchio for fall crop (10–12 wks before first frost = July)", tag: "Indoors", priority: "med" },
+      { text: "Check watermelon — thump test for ripeness, look for dry tendril near fruit", tag: "Harvest", priority: "med" },
+    ]
+  },
+  8: { // August
+    title: "Late Summer — Fall Planting Begins",
+    subtitle: "Your second season starts now",
+    context: "August is crucial for fall crops. Transplant brassicas outside, direct sow kale and fall greens. As summer crops finish, sow cover crop immediately — never leave soil bare. Your first squash are likely ready.",
+    tasks: [
+      { text: "Transplant fall brassicas outside (started mid-July)", tag: "Transplant", priority: "high" },
+      { text: "Direct sow fall kale (8 wks before first frost = mid-August)", tag: "Direct Sow", priority: "high" },
+      { text: "Sow cover crop on any cleared bed immediately", tag: "Cover Crop", priority: "high" },
+      { text: "Harvest and cure winter squash when stems start to cork", tag: "Harvest", priority: "high" },
+      { text: "Third chop-and-drop comfrey around fruit trees", tag: "Food Forest", priority: "med" },
+      { text: "Order fall bulbs — daffodils + alliums for orchard understory", tag: "Food Forest", priority: "med" },
+      { text: "Check and mulch strawberry bed — remove runners if overcrowded", tag: "Maintenance", priority: "med" },
+      { text: "Succession sow arugula + lettuce for fall harvest (it's cool again!)", tag: "Succession", priority: "high" },
+    ]
+  },
+  9: { // September
+    title: "Early Fall — Harvest & Wind Down",
+    subtitle: "First frost Oct 15 — enjoy the abundance",
+    context: "First frost is around October 15. September is still warm enough for most crops. Harvest winter squash before frost. Kale and brassicas love the cool. Order any spring perennials you want to add next year.",
+    tasks: [
+      { text: "Harvest all winter squash before first frost (Oct 15)", tag: "Harvest", priority: "high" },
+      { text: "Harvest and dry herbs — rosemary, sage, thyme, oregano", tag: "Harvest", priority: "med" },
+      { text: "Continue cover cropping cleared beds", tag: "Cover Crop", priority: "high" },
+      { text: "Harvest elderberries (ripen September in zone 6)", tag: "Food Forest", priority: "high" },
+      { text: "Plant fall wildflower seeds in Zone D border", tag: "Perennials", priority: "med" },
+      { text: "Divide and transplant echinacea if overcrowded", tag: "Maintenance", priority: "low" },
+      { text: "Take notes on what worked + what didn't for next year", tag: "Planning", priority: "med" },
+    ]
+  },
+  10: { // October
+    title: "October — Frost Prep & Bulb Planting",
+    subtitle: "First frost ~Oct 15 — protect and preserve",
+    context: "First frost arrives around October 15. Bring in any remaining tender crops before frost. Plant your spring bulbs now — daffodils and alliums for the orchard understory need 6–8 weeks of cold to bloom.",
+    tasks: [
+      { text: "Harvest everything before first frost (tomatoes, basil, tender herbs)", tag: "Harvest", priority: "high" },
+      { text: "Plant daffodil + allium bulbs throughout orchard understory", tag: "Food Forest", priority: "high" },
+      { text: "Plant any perennial herbs or natives you want to add", tag: "Perennials", priority: "med" },
+      { text: "Mulch rose plants lightly before first hard freeze", tag: "Perennials", priority: "high" },
+      { text: "Drain and store hose timer before freezing temps", tag: "Irrigation", priority: "high" },
+      { text: "Drain soaker hoses and drip tubing for winter", tag: "Irrigation", priority: "high" },
+      { text: "Mow or till in cover crop on beds you want ready early in spring", tag: "Cover Crop", priority: "med" },
+    ]
+  },
+  11: { // November
+    title: "November — Put the Garden to Bed",
+    subtitle: "Last tasks before winter",
+    context: "Garden is winding down. Kale and late brassicas can often survive well into November in Zone 6b — harvest until they're done. This is a good time to add amendments to empty beds so they break down over winter.",
+    tasks: [
+      { text: "Harvest kale + any remaining cold-hardy greens (frost improves flavor)", tag: "Harvest", priority: "med" },
+      { text: "Add compost to empty beds — let it break down over winter", tag: "Soil", priority: "med" },
+      { text: "Cut back spent perennials — leave some seedheads for birds", tag: "Maintenance", priority: "med" },
+      { text: "Leave lavender unpruned — prune in early spring, not fall", tag: "Maintenance", priority: "high" },
+      { text: "Mulch strawberry bed for winter protection", tag: "Perennials", priority: "high" },
+      { text: "Order seed catalogs for 2027 — start your wish list", tag: "Planning", priority: "low" },
+    ]
+  },
+  12: { // December
+    title: "December — Rest & Dream",
+    subtitle: "You've earned it — plan for next year",
+    context: "Garden is dormant. This is the planning season. Review your notes from this year, order seeds early for varieties that sell out fast, and dream about what you'll add to the food forest next spring.",
+    tasks: [
+      { text: "Review your season notes — what worked, what failed, what you want more of", tag: "Planning", priority: "med" },
+      { text: "Order seeds for 2027 — early January sells out fast for heirloom varieties", tag: "Planning", priority: "med" },
+      { text: "Check on roses — make sure mulch is intact after any freeze/thaw cycles", tag: "Perennials", priority: "low" },
+      { text: "Plan any new food forest additions — serviceberry? honeyberries?", tag: "Planning", priority: "low" },
+      { text: "Research rose pruning — you'll do it in late February/early March 2027", tag: "Planning", priority: "low" },
+    ]
+  }
+};
+
+// Succession crops
+const successionCrops = [
+  { name: "Romaine + Butter Head Lettuce", s1: "March 15", s2: "April 1", s3: "April 15", s4: "Aug 15 (fall)", why: "Bolts in heat — stop June, restart August for fall harvest" },
+  { name: "Arugula", s1: "March 15", s2: "April 1", s3: "April 15", s4: "Aug 15 (fall)", why: "Very fast (30 days). Gets spicy in heat. Fall crop is sweetest." },
+  { name: "Radish", s1: "March 15", s2: "April 1", s3: "April 15", s4: "Sept 1 (fall)", why: "Done in 25 days. Sow any empty spot constantly. Great row marker." },
+  { name: "Kale", s1: "March 20", s2: "May 1", s3: "Aug 1 (fall)", s4: "—", why: "Spring + fall crops. Fall kale sweetens after frost and can overwinter." },
+  { name: "Beans", s1: "May 15", s2: "June 1", s3: "June 15", s4: "—", why: "Peak production for 3–4 weeks then slow. Stagger for steady supply." },
+  { name: "Cucumbers", s1: "May 15 (transplant)", s2: "June 15 (direct)", s3: "—", s4: "—", why: "Second planting gives fresh flush when first plants slow mid-summer." },
+  { name: "Zinnias", s1: "May 15", s2: "June 1", s3: "June 15", s4: "—", why: "Each sowing blooms for ~6 weeks. Stagger for color all summer." },
+  { name: "Sunflowers", s1: "May 15", s2: "June 1", s3: "June 15", s4: "—", why: "2-week waves give you blooms from July through frost." },
+  { name: "Brassicas (spring + fall)", s1: "Mar (spring)", s2: "July 15 (fall, indoors)", s3: "Aug transplant", s4: "—", why: "Two full seasons — spring and fall. Fall crop tastes better after frost." },
+];
+
+// Calendar data
+const calendarData = [
+  { month: "January", cls: "jan", tasks: ["🌱 Order seeds now — heirlooms sell out", "📋 Plan bed layout and infrastructure", "💧 Order irrigation supplies", "🌹 Order bare-root roses"] },
+  { month: "February", cls: "feb", tasks: ["🌱 Start rosemary, sage, stocks, celosia indoors", "🛠 Build new raised beds", "🌿 Order elderberry, currant, blueberry plants", "🌸 Order comfrey + lavender plugs"] },
+  { month: "March", cls: "mar", tasks: ["🍅 Start tomatoes indoors (mid-March)", "🥦 Start brassicas indoors", "🌸 Start marigolds + calendula indoors", "🥕 Direct sow: carrots, beets, radish, peas, greens", "💧 Install timer + soaker hose"] },
+  { month: "April", cls: "apr", tasks: ["🥦 Transplant brassicas out (frost tolerant!)", "🥒 Start cucumbers + squash indoors", "🌱 Harden off tomatoes", "🌹 Plant bare-root roses + elderberry + currants", "🍓 Plant strawberry crowns", "🌿 Plant lavender + comfrey crowns", "🪨 Install cattle panel arches"] },
+  { month: "May", cls: "may", tasks: ["🍅 Transplant tomatoes after last frost (May 15)", "🥒 Transplant cucumbers to arches", "🎃 Transplant squash + watermelon out", "🫘 Direct sow beans (NEVER transplant)", "🌽 Direct sow corn (4×4 block)", "🌻 Direct sow sunflowers + zinnias", "🌸 Plant marigolds at every bed edge", "🫐 Plant blueberries in amended bed"] },
+  { month: "June", cls: "jun", tasks: ["🌿 Interplant beans with corn (Three Sisters)", "🥒 Train cucumbers + squash onto arches", "🌸 Wave 2 zinnia sowing", "✂️ First comfrey chop-and-drop", "🍓 Harvest snap peas, first lettuces, radish", "🌾 Mulch all beds deeply"] },
+  { month: "July", cls: "jul", tasks: ["🥦 Start fall brassicas indoors (mid-July)", "🥒 Harvest cucumbers + beans every 2 days", "🌸 Wave 3 zinnia sowing", "✂️ Second comfrey chop-and-drop", "🍉 Monitor watermelon for ripeness", "🥬 Sow radicchio for fall crop"] },
+  { month: "August", cls: "aug", tasks: ["🥦 Transplant fall brassicas out", "🥬 Direct sow fall kale", "🎃 Harvest + cure winter squash", "🌱 Sow cover crop on cleared beds", "🧅 Order spring bulbs (daffodil + allium)", "🍇 Harvest elderberries", "🥬 Succession sow arugula + lettuce (fall)"] },
+  { month: "September", cls: "sep", tasks: ["🎃 Harvest remaining squash before Oct 15 frost", "🌿 Dry herbs for winter", "🍇 Harvest currants if ripe", "🌱 Continue cover cropping", "📝 Take season notes"] },
+  { month: "October", cls: "oct", tasks: ["❄️ First frost ~Oct 15 — harvest everything tender", "🧅 Plant daffodil + allium bulbs in orchard", "🌹 Mulch roses before hard freeze", "💧 Drain + store irrigation system", "🌱 Mow in cover crop on early beds"] },
+  { month: "November", cls: "nov", tasks: ["🥬 Harvest frost-sweetened kale + greens", "🌱 Add compost to empty beds", "✂️ Cut back spent perennials", "⚠️ Do NOT prune lavender — wait until spring", "🍓 Mulch strawberry bed"] },
+  { month: "December", cls: "dec", tasks: ["📋 Review season notes + plan 2027", "🌱 Order seeds early January", "🌹 Check rose mulch after freeze/thaw", "💭 Dream about food forest additions"] },
+];
+
+// Note zones
+const noteZones = [
+  { id: "zone-a", label: "Zone A — North Beds", color: "#2e6a28" },
+  { id: "zone-b", label: "Zone B — Center (Greens/Herbs/Flowers)", color: "#4a7a44" },
+  { id: "zone-c", label: "Zone C — Squash & Corn", color: "#6a5a18" },
+  { id: "zone-d", label: "Zone D — West Perennial Strip", color: "#5a4a90" },
+  { id: "zone-e", label: "Zone E — Strawberries & Watermelon", color: "#8a3a50" },
+  { id: "food-forest", label: "Food Forest & Orchard", color: "#2e4a28" },
+  { id: "roses", label: "Roses", color: "#9a4a6a" },
+  { id: "bathtub", label: "Bathtub Planter", color: "#5a6a3a" },
+];
+
+// ══════ STATE ══════
+let currentWeekOffset = 0;
+let tasks = JSON.parse(localStorage.getItem('garden-tasks') || '{}');
+let successionDone = JSON.parse(localStorage.getItem('garden-succession') || '{}');
+
+// ══════ TABS ══════
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('s-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showPlan(id) {
+  document.querySelectorAll('.plan-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.plan-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('plan-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ══════ THIS WEEK ══════
+function getMonthFromOffset(offset) {
+  const d = new Date();
+  d.setDate(d.getDate() + offset * 7);
+  return d.getMonth() + 1; // 1-based
+}
+
+function getWeekLabel(offset) {
+  const d = new Date();
+  d.setDate(d.getDate() + offset * 7);
+  const start = new Date(d);
+  start.setDate(d.getDate() - d.getDay());
+  const end = new Date(start);
+  end.setDate(start.getDate() + 6);
+  const fmt = (dt) => dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  return `Week of ${fmt(start)} – ${fmt(end)}`;
+}
+
+function jumpWeek(offset) {
+  currentWeekOffset = offset;
+  document.querySelectorAll('.week-btn').forEach((b, i) => {
+    b.classList.toggle('active-week', i === offset + 2);
+  });
+  renderWeek();
+}
+
+function renderWeek() {
+  const month = getMonthFromOffset(currentWeekOffset);
+  const data = weeklyTasks[month] || weeklyTasks[1];
+  const weekKey = `week-${month}-${currentWeekOffset}`;
+
+  document.getElementById('week-title').textContent = data.title;
+  document.getElementById('week-subtitle').textContent = data.subtitle;
+  document.getElementById('week-date-label').textContent = getWeekLabel(currentWeekOffset);
+  document.getElementById('season-context').textContent = data.context;
+
+  const listEl = document.getElementById('task-list');
+  listEl.innerHTML = '';
+
+  let doneCount = 0;
+  data.tasks.forEach((task, i) => {
+    const taskKey = `${weekKey}-${i}`;
+    const isDone = tasks[taskKey] || false;
+    if (isDone) doneCount++;
+
+    const item = document.createElement('div');
+    item.className = `task-item${isDone ? ' done' : ''}`;
+    item.onclick = () => toggleTask(taskKey, item, task, i, data.tasks.length, weekKey);
+    item.innerHTML = `
+      <div class="task-priority tp-${task.priority}"></div>
+      <div class="task-cb"></div>
+      <div>
+        <div class="task-text">${task.text}</div>
+        <div class="task-tag">${task.tag}</div>
+      </div>
+    `;
+    listEl.appendChild(item);
+  });
+
+  updateProgress(doneCount, data.tasks.length);
+}
+
+function toggleTask(key, el, task, idx, total, weekKey) {
+  const isDone = !tasks[key];
+  tasks[key] = isDone;
+  localStorage.setItem('garden-tasks', JSON.stringify(tasks));
+  el.classList.toggle('done', isDone);
+
+  let doneCount = 0;
+  for (let i = 0; i < total; i++) {
+    if (tasks[`${weekKey}-${i}`]) doneCount++;
+  }
+  updateProgress(doneCount, total);
+}
+
+function updateProgress(done, total) {
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = `${done} of ${total} tasks done`;
+}
+
+// ══════ CALENDAR ══════
+function renderCalendar() {
+  const grid = document.getElementById('cal-grid');
+  calendarData.forEach(m => {
+    const el = document.createElement('div');
+    el.className = 'cal-month';
+    el.innerHTML = `
+      <div class="cal-month-head ${m.cls}">${m.month}</div>
+      <div class="cal-month-body">${m.tasks.map(t => `<div class="task">${t}</div>`).join('')}</div>
+    `;
+    grid.appendChild(el);
+  });
+}
+
+// ══════ SUCCESSION ══════
+function renderSuccession() {
+  const tbody = document.getElementById('succession-body');
+  successionCrops.forEach((crop, ci) => {
+    const tr = document.createElement('tr');
+    const sowings = [crop.s1, crop.s2, crop.s3, crop.s4];
+    const cells = sowings.map((s, si) => {
+      if (s === '—') return `<td style="color:#ccc;text-align:center;">—</td>`;
+      const key = `succ-${ci}-${si}`;
+      const done = successionDone[key] || false;
+      return `<td>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.75rem;">
+          <input type="checkbox" ${done ? 'checked' : ''} onchange="toggleSuccession('${key}', this)" style="cursor:pointer;">
+          <span style="${done ? 'text-decoration:line-through;color:#aaa;' : ''}">${s}</span>
+        </label>
+      </td>`;
+    }).join('');
+    tr.innerHTML = `<td style="font-weight:600;color:var(--deep);font-size:0.78rem;">${crop.name}</td>${cells}<td style="font-size:0.72rem;color:#777;">${crop.why}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function toggleSuccession(key, el) {
+  successionDone[key] = el.checked;
+  localStorage.setItem('garden-succession', JSON.stringify(successionDone));
+  const span = el.nextElementSibling;
+  if (el.checked) {
+    span.style.textDecoration = 'line-through';
+    span.style.color = '#aaa';
+  } else {
+    span.style.textDecoration = '';
+    span.style.color = '';
+  }
+}
+
+// ══════ NOTES ══════
+function renderNotes() {
+  const grid = document.getElementById('notes-grid');
+  noteZones.forEach(z => {
+    const saved = localStorage.getItem('note-' + z.id) || '';
+    const el = document.createElement('div');
+    el.className = 'note-card';
+    el.innerHTML = `
+      <div class="note-head" style="background:${z.color}">${z.label}</div>
+      <div class="note-body">
+        <textarea class="note-area" id="note-${z.id}" placeholder="Observations, what you planted, varieties, dates, ideas...">${saved}</textarea>
+        <div style="display:flex;align-items:center;margin-top:0.4rem;">
+          <button class="note-save" onclick="saveNote('${z.id}')">Save</button>
+          <span class="note-saved" id="saved-${z.id}">✓ Saved</span>
+        </div>
+      </div>
+    `;
+    grid.appendChild(el);
+  });
+
+  // Load journal
+  document.getElementById('journal-area').value = localStorage.getItem('garden-journal') || '';
+}
+
+function saveNote(id) {
+  const val = document.getElementById('note-' + id).value;
+  localStorage.setItem('note-' + id, val);
+  const indicator = document.getElementById('saved-' + id);
+  indicator.classList.add('show');
+  setTimeout(() => indicator.classList.remove('show'), 2000);
+}
+
+function saveJournal() {
+  localStorage.setItem('garden-journal', document.getElementById('journal-area').value);
+  const indicator = document.getElementById('journal-saved');
+  indicator.classList.add('show');
+  setTimeout(() => indicator.classList.remove('show'), 2000);
+}
+
+// ══════ MAP TOOLTIP ══════
+function tip(e, title, body) {
+  const el = document.getElementById('map-tooltip');
+  el.innerHTML = `<strong style="display:block;margin-bottom:3px;color:var(--pale-gold);">${title}</strong>${body}`;
+  el.style.opacity = '1';
+  moveTip(e);
+}
+function moveTip(e) {
+  const el = document.getElementById('map-tooltip');
+  let x = e.clientX + 14, y = e.clientY + 14;
+  if (x + 230 > window.innerWidth) x = e.clientX - 230;
+  if (y + 120 > window.innerHeight) y = e.clientY - 120;
+  el.style.left = x + 'px';
+  el.style.top = y + 'px';
+}
+function hideTip() {
+  document.getElementById('map-tooltip').style.opacity = '0';
+}
+document.addEventListener('mousemove', e => {
+  if (document.getElementById('map-tooltip').style.opacity === '1') moveTip(e);
+});
+
+// ══════ INIT ══════
+document.addEventListener('DOMContentLoaded', () => {
+  renderWeek();
+  renderCalendar();
+  renderSuccession();
+  renderNotes();
+});
+</script>
+</body>
+</html>
